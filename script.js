@@ -715,3 +715,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillElements = document.querySelectorAll('.skills');
     skillElements.forEach(el => el.classList.add('from-right'));
 });
+
+// ========================================
+//    HOBBY GALLERY TOGGLE FUNCTION
+// ========================================
+function toggleHobiGallery(card) {
+    const wrapper = card.closest('.hobi-card-wrapper');
+    const gallery = wrapper.querySelector('.hobi-gallery');
+    const isActive = card.classList.contains('active');
+
+    // Close all other galleries first
+    document.querySelectorAll('.hobi-card.active').forEach(otherCard => {
+        if (otherCard !== card) {
+            otherCard.classList.remove('active');
+            otherCard.closest('.hobi-card-wrapper').querySelector('.hobi-gallery').classList.remove('active');
+        }
+    });
+
+    // Toggle current gallery
+    if (isActive) {
+        card.classList.remove('active');
+        gallery.classList.remove('active');
+    } else {
+        card.classList.add('active');
+        gallery.classList.add('active');
+    }
+}

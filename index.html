@@ -407,20 +407,86 @@
             <div class="container">
                 <h2 class="section__title reveal">Hobi & Minat</h2>
                 <div class="hobi-cards reveal">
-                    <div class="hobi-card">
-                        <span class="hobi-icon">⚜️</span>
-                        <h4>Pramuka</h4>
-                        <p>Kegiatan Kepramukaan</p>
+                    <!-- Pramuka Card with Gallery -->
+                    <div class="hobi-card-wrapper">
+                        <div class="hobi-card expandable" onclick="toggleHobiGallery(this)">
+                            <span class="hobi-icon">⚜️</span>
+                            <h4>Pramuka</h4>
+                            <p>Kegiatan Kepramukaan</p>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="hobi-gallery">
+                            <div class="hobi-gallery__grid">
+                                <div class="hobi-gallery__item">
+                                    <img src="img/pramuka1.jpg" alt="Kegiatan Pramuka 1"
+                                        onerror="this.src='https://via.placeholder.com/200x150/7C3AED/FFFFFF?text=Pramuka+1'">
+                                    <span class="hobi-gallery__caption">Kegiatan Kemah</span>
+                                </div>
+                                <div class="hobi-gallery__item">
+                                    <img src="img/pramuka2.jpg" alt="Kegiatan Pramuka 2"
+                                        onerror="this.src='https://via.placeholder.com/200x150/7C3AED/FFFFFF?text=Pramuka+2'">
+                                    <span class="hobi-gallery__caption">Upacara</span>
+                                </div>
+                                <div class="hobi-gallery__item">
+                                    <img src="img/pramuka3.jpg" alt="Kegiatan Pramuka 3"
+                                        onerror="this.src='https://via.placeholder.com/200x150/7C3AED/FFFFFF?text=Pramuka+3'">
+                                    <span class="hobi-gallery__caption">Latihan Rutin</span>
+                                </div>
+                                <div class="hobi-gallery__item">
+                                    <img src="img/pramuka4.jpg" alt="Kegiatan Pramuka 4"
+                                        onerror="this.src='https://via.placeholder.com/200x150/7C3AED/FFFFFF?text=Pramuka+4'">
+                                    <span class="hobi-gallery__caption">Jambore</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hobi-card">
-                        <span class="hobi-icon">📚</span>
-                        <h4>Membaca</h4>
-                        <p>Teknologi & Fiksi</p>
+
+                    <!-- Membaca Card with Gallery -->
+                    <div class="hobi-card-wrapper">
+                        <div class="hobi-card expandable" onclick="toggleHobiGallery(this)">
+                            <span class="hobi-icon">📚</span>
+                            <h4>Membaca</h4>
+                            <p>Teknologi & Fiksi</p>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="hobi-gallery">
+                            <div class="hobi-gallery__grid">
+                                <div class="hobi-gallery__item">
+                                    <img src="img/buku1.jpg" alt="Buku Favorit 1"
+                                        onerror="this.src='https://via.placeholder.com/200x150/2563EB/FFFFFF?text=Buku+1'">
+                                    <span class="hobi-gallery__caption">Buku Teknologi</span>
+                                </div>
+                                <div class="hobi-gallery__item">
+                                    <img src="img/buku2.jpg" alt="Buku Favorit 2"
+                                        onerror="this.src='https://via.placeholder.com/200x150/2563EB/FFFFFF?text=Buku+2'">
+                                    <span class="hobi-gallery__caption">Novel Fiksi</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hobi-card">
-                        <span class="hobi-icon">🎵</span>
-                        <h4>Musik</h4>
-                        <p>Pop & Rock</p>
+
+                    <!-- Musik Card with Gallery -->
+                    <div class="hobi-card-wrapper">
+                        <div class="hobi-card expandable" onclick="toggleHobiGallery(this)">
+                            <span class="hobi-icon">🎵</span>
+                            <h4>Musik</h4>
+                            <p>Pop & Rock</p>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="hobi-gallery">
+                            <div class="hobi-gallery__grid">
+                                <div class="hobi-gallery__item">
+                                    <img src="img/musik1.jpg" alt="Musik 1"
+                                        onerror="this.src='https://via.placeholder.com/200x150/D946EF/FFFFFF?text=Musik+1'">
+                                    <span class="hobi-gallery__caption">Playlist Favorit</span>
+                                </div>
+                                <div class="hobi-gallery__item">
+                                    <img src="img/musik2.jpg" alt="Musik 2"
+                                        onerror="this.src='https://via.placeholder.com/200x150/D946EF/FFFFFF?text=Musik+2'">
+                                    <span class="hobi-gallery__caption">Konser</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
