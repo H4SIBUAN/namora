@@ -1,7 +1,7 @@
 /* ========================================
    PORTFOLIO INTERACTIVE SCRIPT
    Author: Ardiansyah Namora H.
-   Updated: FIXED ACTIVE LINK ON SCROLL
+   Updated: FIXED ACTIVE LINK ON SCROLL & FIREBASE
    ======================================== */
 
 // 1. IMPORT FIREBASE
@@ -24,22 +24,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const commentsRef = ref(db, 'comments');
+const visitorCountRef = ref(db, 'visitorCount');
 
 // --- LOGIC UTAMA WEBSITE ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ========================================
-       A. NAVIGATION ACTIVE LINK ON SCROLL (BARU & PENTING!)
+       A. NAVIGATION ACTIVE LINK ON SCROLL
        ======================================== */
-    const sections = document.querySelectorAll('section[id]'); // Ambil semua section yang punya ID (home, about, dll)
+    const sections = document.querySelectorAll('section[id]');
 
     function scrollActive() {
         const scrollY = window.scrollY;
 
         sections.forEach(current => {
             const sectionHeight = current.offsetHeight;
-            // Dikurang 100 agar highlight pindah sedikit sebelum section benar-benar sampai atas
             const sectionTop = current.offsetTop - 100;
             const sectionId = current.getAttribute('id');
             const sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    // Jalankan fungsi ini setiap kali user scroll
     window.addEventListener('scroll', scrollActive);
 
 
@@ -116,16 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navToggle) navToggle.addEventListener('click', () => navMenu.classList.add('active'));
     if (navClose) navClose.addEventListener('click', () => navMenu.classList.remove('active'));
 
-    // Tutup menu mobile jika link diklik
     navLinks.forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
 
-    // Header Shadow saat scroll
     window.addEventListener('scroll', () => {
         if (window.scrollY >= 50) header.style.boxShadow = "0 2px 10px var(--color-shadow)";
         else header.style.boxShadow = "none";
     });
 
-    // Show Scroll Up Button
     const scrollUp = document.getElementById('scroll-up');
     window.addEventListener('scroll', () => {
         if (window.scrollY >= 350) scrollUp.classList.add('show-scroll');
@@ -232,27 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typedTextSpan && textArray.length) setTimeout(type, 250);
 
     /* ========================================
-       I. NOTIFICATION SYSTEM
-       ======================================== */
-    const showNotification = (message, type) => {
-        const oldNotif = document.querySelector('.custom-alert');
-        if (oldNotif) oldNotif.remove();
-        const alert = document.createElement('div');
-        alert.className = 'custom-alert';
-        alert.textContent = message;
-        Object.assign(alert.style, {
-            position: 'fixed', bottom: '20px', right: '20px', padding: '15px 25px', borderRadius: '12px',
-            background: type === 'success' ? 'rgba(34, 197, 94, 0.9)' : 'rgba(239, 68, 68, 0.9)',
-            color: 'white', backdropFilter: 'blur(10px)', boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-            zIndex: '9999', transform: 'translateY(100px)', transition: 'transform 0.5s ease',
-            fontFamily: 'var(--font-family)', fontWeight: '500'
-        });
-        document.body.appendChild(alert);
-        setTimeout(() => { alert.style.transform = 'translateY(0)'; }, 100);
-        setTimeout(() => { alert.style.transform = 'translateY(100px)'; setTimeout(() => alert.remove(), 500); }, 4000);
-    };
-
-    /* ========================================
        J. TAB SWITCHER (KOMENTAR vs EMAIL)
        ======================================== */
     const tabBtns = document.querySelectorAll('.tab-btn');
@@ -280,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ========================================
-       K. FIREBASE COMMENT SYSTEM (ONLINE)
+       K. FIREBASE COMMENT SYSTEM
        ======================================== */
     const commentForm = document.getElementById('comment-form');
     const commentsContainer = document.getElementById('comments-container');
@@ -326,7 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    window.deleteComment = (key, element) => {
+    // Function to delete comment
+    const deleteComment = (key, element) => {
         const password = prompt("🔒 Masukkan Password Admin:");
         if (password === "admin123") {
             if (confirm("Yakin ingin menghapus komentar ini dari database?")) {
@@ -390,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ========================================
        M. PARTICLES.JS (Classic Professional)
        ======================================== */
-    if (document.getElementById('particles-js')) {
+    if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
@@ -422,12 +398,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.code === konamiCode[konamiIndex]) {
             konamiIndex++;
             if (konamiIndex === konamiCode.length) {
-                // Konami Code completed!
                 easterEggModal.classList.add('active');
                 konamiIndex = 0;
                 showNotification('🎮 Konami Code Activated!', 'success');
-
-                // Create confetti effect
                 createConfetti();
             }
         } else {
@@ -441,7 +414,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Close on backdrop click
     if (easterEggModal) {
         easterEggModal.addEventListener('click', (e) => {
             if (e.target === easterEggModal) {
@@ -450,7 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Confetti function
     function createConfetti() {
         const colors = ['#ff6b6b', '#ffd93d', '#6bcf7f', '#4d9de0', '#7b5cd6', '#ff00c8'];
         for (let i = 0; i < 100; i++) {
@@ -471,7 +442,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => confetti.remove(), 5000);
         }
 
-        // Add confetti animation if not exists
         if (!document.getElementById('confetti-style')) {
             const style = document.createElement('style');
             style.id = 'confetti-style';
@@ -496,19 +466,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const commandItems = document.querySelectorAll('.command-item');
     let selectedIndex = -1;
 
-    // Open Command Palette with Ctrl+K
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
             toggleCommandPalette();
         }
 
-        // Close with Escape
         if (e.key === 'Escape' && commandPalette.classList.contains('active')) {
             closeCommandPalette();
         }
 
-        // Navigate with arrows
         if (commandPalette.classList.contains('active')) {
             const visibleItems = Array.from(commandItems).filter(item => !item.classList.contains('hidden'));
 
@@ -561,7 +528,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Search/Filter functionality
     if (commandInput) {
         commandInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
@@ -579,7 +545,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Close on backdrop click
     if (commandPalette) {
         commandPalette.addEventListener('click', (e) => {
             if (e.target === commandPalette) {
@@ -588,7 +553,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Handle command item clicks
     commandItems.forEach(item => {
         item.addEventListener('click', () => {
             const action = item.getAttribute('data-action');
@@ -619,18 +583,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ========================================
-       P. VISITOR COUNTER (Firebase Realtime)
+       P. VISITOR COUNTER
        ======================================== */
-    const visitorCountRef = ref(db, 'visitorCount');
     const visitorCountDisplay = document.getElementById('visitor-count');
-
-    // Check if visitor already counted in this session
     const sessionKey = 'visitor_counted';
     const hasBeenCounted = sessionStorage.getItem(sessionKey);
 
-    // Get current count and increment if new visitor
-
-    // Listen for realtime updates
     onValue(visitorCountRef, (snapshot) => {
         const count = snapshot.val() || 0;
         if (visitorCountDisplay) {
@@ -638,7 +596,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Increment count for new visitors
     if (!hasBeenCounted) {
         get(visitorCountRef).then((snapshot) => {
             const currentCount = snapshot.val() || 0;
@@ -649,14 +606,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Animate counter function
     function animateCounter(element, target) {
         const current = parseInt(element.textContent) || 0;
         if (current === target) return;
-
         const increment = target > current ? 1 : -1;
         const step = Math.abs(target - current) > 50 ? Math.ceil(Math.abs(target - current) / 30) : 1;
-
         let value = current;
         const timer = setInterval(() => {
             value += step * increment;
@@ -667,6 +621,7 @@ document.addEventListener('DOMContentLoaded', () => {
             element.textContent = value.toLocaleString();
         }, 30);
     }
+
 
     console.log("✅ Portfolio System Online (Professional Mode)");
     console.log("💡 Tip: Tekan Ctrl+K untuk Command Palette atau coba Konami Code ↑↑↓↓←→←→BA");
@@ -680,7 +635,6 @@ document.addEventListener('DOMContentLoaded', () => {
         responses.forEach((response, index) => {
             response.style.opacity = '0';
             setTimeout(() => {
-                // Show typing indicator
                 const typingIndicator = document.createElement('div');
                 typingIndicator.className = 'typing-indicator';
                 typingIndicator.innerHTML = '<span></span><span></span><span></span>';
@@ -709,17 +663,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Enhanced scroll reveal with different directions
     const aboutInfoElements = document.querySelectorAll('.about__info');
     aboutInfoElements.forEach(el => el.classList.add('from-left'));
     const skillElements = document.querySelectorAll('.skills');
     skillElements.forEach(el => el.classList.add('from-right'));
+
 });
+
+// Helper Notification
+const showNotification = (message, type) => {
+    const oldNotif = document.querySelector('.custom-alert');
+    if (oldNotif) oldNotif.remove();
+    const alert = document.createElement('div');
+    alert.className = 'custom-alert';
+    alert.textContent = message;
+    Object.assign(alert.style, {
+        position: 'fixed', bottom: '20px', right: '20px', padding: '15px 25px', borderRadius: '12px',
+        background: type === 'success' ? 'rgba(34, 197, 94, 0.9)' : 'rgba(239, 68, 68, 0.9)',
+        color: 'white', backdropFilter: 'blur(10px)', boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+        zIndex: '9999', transform: 'translateY(100px)', transition: 'transform 0.5s ease',
+        fontFamily: 'var(--font-family)', fontWeight: '500'
+    });
+    document.body.appendChild(alert);
+    setTimeout(() => { alert.style.transform = 'translateY(0)'; }, 100);
+    setTimeout(() => { alert.style.transform = 'translateY(100px)'; setTimeout(() => alert.remove(), 500); }, 4000);
+};
 
 // ========================================
 //    HOBBY GALLERY TOGGLE FUNCTION
 // ========================================
-function toggleHobiGallery(card) {
+window.toggleHobiGallery = function (card) {
     const wrapper = card.closest('.hobi-card-wrapper');
     const gallery = wrapper.querySelector('.hobi-gallery');
     const isActive = card.classList.contains('active');
