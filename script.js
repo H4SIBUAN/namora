@@ -728,16 +728,20 @@ function toggleHobiGallery(card) {
     document.querySelectorAll('.hobi-card.active').forEach(otherCard => {
         if (otherCard !== card) {
             otherCard.classList.remove('active');
-            otherCard.closest('.hobi-card-wrapper').querySelector('.hobi-gallery').classList.remove('active');
+            const otherWrapper = otherCard.closest('.hobi-card-wrapper');
+            otherWrapper.classList.remove('expanded');
+            otherWrapper.querySelector('.hobi-gallery').classList.remove('active');
         }
     });
 
     // Toggle current gallery
     if (isActive) {
         card.classList.remove('active');
+        wrapper.classList.remove('expanded');
         gallery.classList.remove('active');
     } else {
         card.classList.add('active');
+        wrapper.classList.add('expanded');
         gallery.classList.add('active');
     }
 }

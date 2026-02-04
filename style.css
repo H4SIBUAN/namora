@@ -3293,10 +3293,27 @@ textarea {
 /* ========================================
    HOBBY CARD EXPANDABLE GALLERY
    ======================================== */
+
+/* Container for hobby cards - horizontal layout */
+.hobi-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
 .hobi-card-wrapper {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    flex: 0 1 calc(33.333% - 1rem);
+    min-width: 200px;
+    transition: all 0.4s ease;
+}
+
+/* When card is active, take full width */
+.hobi-card-wrapper.expanded {
+    flex: 1 1 100%;
+    order: -1;
 }
 
 .hobi-card.expandable {
