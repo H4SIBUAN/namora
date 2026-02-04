@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Ardiansyah Namora Hasibuan - Siswa TKJ yang kreatif dan inovatif">
+    <title>Ardiansyah Namora Hasibuan | Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Courier+New&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="context-menu">
+        <div class="menu-item" onclick="location.reload()">🔄 Refresh System</div>
+        <div class="menu-item" onclick="window.print()">🖨️ Print Portfolio</div>
+        <div class="menu-item" onclick="alert('System Status: 100% Secure. Developed by ANH.')">🛡️ Security Check</div>
+        <div class="menu-item disabled">-------------------</div>
+        <div class="menu-item">© 2026 ANH Portfolio</div>
+    </div>
+
+    <div id="scroll-progress"></div>
+
+    <div id="digital-clock" class="floating-clock">
+        <span class="clock-icon">🕒</span>
+        <span id="time-display">00:00:00</span>
+        <span class="flag-icon">🇮🇩</span>
+    </div>
+
+    <div id="particles-js"></div>
+
+    <!-- Geometric Floating Shapes -->
+    <div class="geometric-shapes">
+        <div class="geo-shape circle"></div>
+        <div class="geo-shape triangle"></div>
+        <div class="geo-shape square"></div>
+        <div class="geo-shape diamond"></div>
+        <div class="geo-shape cross"></div>
+    </div>
+
+    <!-- Floating Social Icons -->
+    <div class="floating-socials">
+        <a href="https://instagram.com/mrphx._" target="_blank" class="floating-social-link" aria-label="Instagram">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/ardiansyah-namora-hasibuan-b8b88b35a/" target="_blank"
+            class="floating-social-link" aria-label="LinkedIn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+            </svg>
+        </a>
+        <a href="https://github.com/H4SIBUAN" target="_blank" class="floating-social-link" aria-label="GitHub">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+        </a>
+    </div>
+
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">ANH</a>
+
+            <!-- Visitor Counter in Navbar -->
+            <div class="nav__visitor-counter" id="visitor-counter">
+                <span class="nav__visitor-icon">👁️</span>
+                <span class="nav__visitor-label">Views</span>
+                <span id="visitor-count" class="nav__visitor-count">0</span>
+            </div>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#tentang" class="nav__link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                            Tentang
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#keahlian" class="nav__link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                                <line x1="8" y1="21" x2="16" y2="21" />
+                                <line x1="12" y1="17" x2="12" y2="21" />
+                            </svg>
+                            Keahlian
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#hobi" class="nav__link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polygon points="10 8 16 12 10 16 10 8" />
+                            </svg>
+                            Hobi
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#pendidikan" class="nav__link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                            </svg>
+                            Pendidikan
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#projects" class="nav__link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                            </svg>
+                            My Project
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contact" class="nav__link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Kontak
+                        </a>
+                    </li>
+                </ul>
+                <button class="nav__close" id="nav-close">✕</button>
+            </div>
+
+            <div class="nav__actions">
+                <button class="theme-toggle" id="theme-toggle"><span class="theme-toggle__icon">🌙</span></button>
+                <button class="nav__toggle" id="nav-toggle"><span class="hamburger"></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero__container container">
+                <div class="hero__content reveal">
+                    <span class="hero__greeting">Halo, Saya</span>
+                    <h1 class="hero__name animate-gradient glitch" data-text="Ardiansyah Namora H.">Ardiansyah Namora H.
+                    </h1>
+                    <h3 class="hero__role">Saya adalah <span class="typed-text"></span></h3>
+                    <p class="hero__description">
+                        Seorang siswa yang passionate dalam pengembangan web dan teknologi jaringan.
+                        Selalu antusias untuk belajar hal-hal baru dan menciptakan solusi digital yang kreatif.
+                    </p>
+                    <a href="#projects" class="btn btn--primary">Lihat Karyaku</a>
+                </div>
+
+                <div class="hero__image reveal">
+                    <div class="hero__blob">
+                        <img src="img/namora1.jpg" alt="Ardiansyah Foto 1" class="hero__photo active floating-img">
+                        <img src="img/namora2.jpg" alt="Ardiansyah Foto 2" class="hero__photo floating-img">
+                        <img src="img/namora3.jpg" alt="Ardiansyah Foto 3" class="hero__photo floating-img">
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero__scroll reveal">
+                <a href="#tentang" class="hero__scroll-link">
+                    <span>Scroll Down</span>
+                    <span class="hero__scroll-icon">↓</span>
+                </a>
+            </div>
+        </section>
+
+        <div class="tech-slider">
+            <div class="slide-track">
+                <div class="slide">
+                    <h3>HTML5</h3>
+                </div>
+                <div class="slide">
+                    <h3>CSS3</h3>
+                </div>
+                <div class="slide">
+                    <h3>JAVASCRIPT</h3>
+                </div>
+                <div class="slide">
+                    <h3>PHP</h3>
+                </div>
+                <div class="slide">
+                    <h3>MYSQL</h3>
+                </div>
+                <div class="slide">
+                    <h3>LINUX</h3>
+                </div>
+                <div class="slide">
+                    <h3>MIKROTIK</h3>
+                </div>
+                <div class="slide">
+                    <h3>HTML5</h3>
+                </div>
+                <div class="slide">
+                    <h3>CSS3</h3>
+                </div>
+                <div class="slide">
+                    <h3>JAVASCRIPT</h3>
+                </div>
+                <div class="slide">
+                    <h3>PHP</h3>
+                </div>
+                <div class="slide">
+                    <h3>MYSQL</h3>
+                </div>
+                <div class="slide">
+                    <h3>LINUX</h3>
+                </div>
+                <div class="slide">
+                    <h3>MIKROTIK</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Tentang -->
+        <section class="about section" id="tentang">
+            <div class="container">
+                <h2 class="section__title reveal">Tentang Saya</h2>
+                <div class="about__content">
+                    <div class="about__info reveal">
+                        <div class="terminal-window">
+                            <div class="terminal-header">
+                                <div class="terminal-buttons"><span class="close"></span><span
+                                        class="minimize"></span><span class="maximize"></span></div>
+                                <span class="terminal-title">root@namora:~</span>
+                            </div>
+                            <div class="terminal-body" id="terminal-body">
+                                <p><span class="command">root@namora:~$</span> whoami</p>
+                                <p class="response">Siswa <strong>TKJ (Network Engineer)</strong> & Web Developer.</p>
+                                <p><span class="command">root@namora:~$</span> scan_visitor -v</p>
+                                <div id="scan-result"></div>
+                            </div>
+                        </div>
+                        <div class="stats-container">
+                            <div class="stat-item">
+                                <h3 class="stat-number" data-target="15">0</h3>
+                                <p class="stat-title">Proyek</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 class="stat-number" data-target="1000">0</h3>
+                                <p class="stat-title">Jam Coding</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 class="stat-number" data-target="100">0</h3>
+                                <p class="stat-title">Config Router</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Slider Divider: Development -->
+        <div class="tech-slider">
+            <div class="slide-track reverse">
+                <div class="slide">
+                    <h3>FRONTEND</h3>
+                </div>
+                <div class="slide">
+                    <h3>BACKEND</h3>
+                </div>
+                <div class="slide">
+                    <h3>DATABASE</h3>
+                </div>
+                <div class="slide">
+                    <h3>UI/UX</h3>
+                </div>
+                <div class="slide">
+                    <h3>API</h3>
+                </div>
+                <div class="slide">
+                    <h3>FIGMA</h3>
+                </div>
+                <div class="slide">
+                    <h3>GIT</h3>
+                </div>
+                <div class="slide">
+                    <h3>FRONTEND</h3>
+                </div>
+                <div class="slide">
+                    <h3>BACKEND</h3>
+                </div>
+                <div class="slide">
+                    <h3>DATABASE</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Keahlian -->
+        <section class="keahlian section" id="keahlian">
+            <div class="container">
+                <h2 class="section__title reveal">Keahlian</h2>
+                <div class="skills reveal">
+                    <div class="skills__list">
+                        <div class="skill">
+                            <div class="skill__header"><span class="skill__name">HTML5</span><span class="skill__number"
+                                    data-target="90">0%</span></div>
+                            <div class="skill__bar">
+                                <div class="skill__progress" style="--progress: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill__header"><span class="skill__name">CSS3</span><span class="skill__number"
+                                    data-target="85">0%</span></div>
+                            <div class="skill__bar">
+                                <div class="skill__progress" style="--progress: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill__header"><span class="skill__name">JavaScript</span><span
+                                    class="skill__number" data-target="75">0%</span></div>
+                            <div class="skill__bar">
+                                <div class="skill__progress" style="--progress: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill__header"><span class="skill__name">Network (MikroTik)</span><span
+                                    class="skill__number" data-target="80">0%</span></div>
+                            <div class="skill__bar">
+                                <div class="skill__progress" style="--progress: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-cards reveal">
+                    <div class="skill-card">
+                        <span class="skill-icon">🌐</span>
+                        <h4>Web Development</h4>
+                        <p>HTML, CSS, JavaScript, PHP</p>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-icon">🔧</span>
+                        <h4>Networking</h4>
+                        <p>MikroTik, Cisco, Linux Server</p>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-icon">💾</span>
+                        <h4>Database</h4>
+                        <p>MySQL, Firebase</p>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-icon">🛠️</span>
+                        <h4>Tools</h4>
+                        <p>Git, VS Code, Figma</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Slider Divider: Networking -->
+        <div class="tech-slider">
+            <div class="slide-track">
+                <div class="slide">
+                    <h3>CISCO</h3>
+                </div>
+                <div class="slide">
+                    <h3>MIKROTIK</h3>
+                </div>
+                <div class="slide">
+                    <h3>ROUTER</h3>
+                </div>
+                <div class="slide">
+                    <h3>FIREWALL</h3>
+                </div>
+                <div class="slide">
+                    <h3>SWITCH</h3>
+                </div>
+                <div class="slide">
+                    <h3>VLAN</h3>
+                </div>
+                <div class="slide">
+                    <h3>WIRELESS</h3>
+                </div>
+                <div class="slide">
+                    <h3>CISCO</h3>
+                </div>
+                <div class="slide">
+                    <h3>MIKROTIK</h3>
+                </div>
+                <div class="slide">
+                    <h3>ROUTER</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Section: Hobi -->
+        <section class="hobi section" id="hobi">
+            <div class="container">
+                <h2 class="section__title reveal">Hobi & Minat</h2>
+                <div class="hobi-cards reveal">
+                    <div class="hobi-card">
+                        <span class="hobi-icon">🎮</span>
+                        <h4>Gaming</h4>
+                        <p>FPS & Strategy Games</p>
+                    </div>
+                    <div class="hobi-card">
+                        <span class="hobi-icon">📚</span>
+                        <h4>Membaca</h4>
+                        <p>Teknologi & Fiksi</p>
+                    </div>
+                    <div class="hobi-card">
+                        <span class="hobi-icon">🎵</span>
+                        <h4>Musik</h4>
+                        <p>Pop & Rock</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tech-slider">
+            <div class="slide-track">
+                <div class="slide">
+                    <h3>GAMING</h3>
+                </div>
+                <div class="slide">
+                    <h3>READING</h3>
+                </div>
+                <div class="slide">
+                    <h3>CODING</h3>
+                </div>
+                <div class="slide">
+                    <h3>MUSIC</h3>
+                </div>
+                <div class="slide">
+                    <h3>TRAVEL</h3>
+                </div>
+                <div class="slide">
+                    <h3>GAMING</h3>
+                </div>
+                <div class="slide">
+                    <h3>READING</h3>
+                </div>
+                <div class="slide">
+                    <h3>CODING</h3>
+                </div>
+                <div class="slide">
+                    <h3>MUSIC</h3>
+                </div>
+                <div class="slide">
+                    <h3>TRAVEL</h3>
+                </div>
+            </div>
+        </div>
+
+        <section class="pendidikan section" id="pendidikan">
+            <div class="container">
+                <h2 class="section__title reveal">Riwayat Pendidikan</h2>
+                <div class="education-timeline reveal">
+                    <div class="education-item">
+                        <div class="edu-year">2023 - Sekarang</div>
+                        <div class="edu-info">
+                            <h4>SMK TKJ</h4>
+                            <p>Teknik Komputer dan Jaringan</p>
+                        </div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-year">2020 - 2023</div>
+                        <div class="edu-info">
+                            <h4>SMP</h4>
+                            <p>Sekolah Menengah Pertama</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Slider Divider: Professional -->
+        <div class="tech-slider">
+            <div class="slide-track reverse">
+                <div class="slide">
+                    <h3>PORTFOLIO</h3>
+                </div>
+                <div class="slide">
+                    <h3>E-COMMERCE</h3>
+                </div>
+                <div class="slide">
+                    <h3>APPS</h3>
+                </div>
+                <div class="slide">
+                    <h3>SECURITY</h3>
+                </div>
+                <div class="slide">
+                    <h3>SERVER</h3>
+                </div>
+                <div class="slide">
+                    <h3>NETWORKING</h3>
+                </div>
+                <div class="slide">
+                    <h3>PORTFOLIO</h3>
+                </div>
+                <div class="slide">
+                    <h3>E-COMMERCE</h3>
+                </div>
+            </div>
+        </div>
+
+        <section class="projects section" id="projects">
+            <div class="container">
+                <h2 class="section__title reveal">Proyek Saya</h2>
+                <p class="section__subtitle reveal">Kumpulan karya dan tugas yang telah saya kerjakan</p>
+
+                <div class="project-filters reveal">
+                    <button class="filter-btn active" data-filter="all">Semua</button>
+                    <button class="filter-btn" data-filter="web">Web Dev</button>
+                    <button class="filter-btn" data-filter="network">Jaringan</button>
+                    <button class="filter-btn" data-filter="game">Game/App</button>
+                </div>
+
+                <div class="projects__grid">
+                    <article class="project-card reveal spotlight-card" data-category="web">
+                        <div class="project-card__image"><span class="project-card__icon">🌐</span></div>
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Website Portfolio</h3>
+                            <p class="project-card__description">Website portfolio pribadi dengan desain modern dan efek
+                                glassmorphism.</p>
+                            <div class="project-card__tags"><span class="tag">HTML</span><span
+                                    class="tag">CSS</span><span class="tag">JS</span></div>
+                        </div>
+                    </article>
+                    <article class="project-card reveal spotlight-card" data-category="web">
+                        <div class="project-card__image"><span class="project-card__icon">🛒</span></div>
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Sistem E-Commerce</h3>
+                            <p class="project-card__description">Aplikasi toko online sederhana dengan fitur keranjang
+                                belanja.</p>
+                            <div class="project-card__tags"><span class="tag">PHP</span><span class="tag">MySQL</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card reveal spotlight-card" data-category="game">
+                        <a href="game.html" class="project-card__link" style="text-decoration: none; color: inherit;">
+                            <div class="project-card__image"><span class="project-card__icon">🎮</span></div>
+                            <div class="project-card__content">
+                                <h3 class="project-card__title">Neon Snake Game</h3>
+                                <p class="project-card__description">Mainkan game Snake klasik dengan gaya neon
+                                    futuristik langsung di browser!</p>
+                                <div class="project-card__tags">
+                                    <span class="tag">JS</span>
+                                    <span class="tag">Canvas</span>
+                                    <span class="tag">Playable</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="project-card reveal spotlight-card" data-category="network">
+                        <div class="project-card__image"><span class="project-card__icon">📡</span></div>
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Konfigurasi VLAN</h3>
+                            <p class="project-card__description">Simulasi topologi jaringan menggunakan Cisco Packet
+                                Tracer.</p>
+                            <div class="project-card__tags"><span class="tag">Cisco</span><span
+                                    class="tag">Network</span></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Slider Divider: Inquiry -->
+
+        <div class="tech-slider">
+            <div class="slide-track">
+                <div class="slide">
+                    <h3>CONTACT</h3>
+                </div>
+                <div class="slide">
+                    <h3>COLLABORATE</h3>
+                </div>
+                <div class="slide">
+                    <h3>HIRE ME</h3>
+                </div>
+                <div class="slide">
+                    <h3>EMAIL</h3>
+                </div>
+                <div class="slide">
+                    <h3>SOCIALS</h3>
+                </div>
+                <div class="slide">
+                    <h3>CONTACT</h3>
+                </div>
+                <div class="slide">
+                    <h3>COLLABORATE</h3>
+                </div>
+                <div class="slide">
+                    <h3>HIRE ME</h3>
+                </div>
+                <div class="slide">
+                    <h3>EMAIL</h3>
+                </div>
+                <div class="slide">
+                    <h3>SOCIALS</h3>
+                </div>
+            </div>
+        </div>
+
+        <section class="contact section" id="contact">
+            <div class="container">
+                <h2 class="section__title reveal">Komentar & Hubungi Saya</h2>
+                <p class="section__subtitle reveal">Tinggalkan jejak atau kirim pesan pribadi</p>
+
+                <div class="contact__content">
+                    <div class="contact__info reveal">
+                        <div class="contact__card spotlight-card">
+                            <span class="contact__card-icon">📧</span>
+                            <h3 class="contact__card-title">Email</h3>
+                            <p class="contact__card-text">ardiansyahnamorahasibuan@email.com</p>
+                        </div>
+                        <div class="contact__card spotlight-card">
+                            <span class="contact__card-icon">📍</span>
+                            <h3 class="contact__card-title">Lokasi</h3>
+                            <p class="contact__card-text">Bekasi, Indonesia</p>
+                        </div>
+                    </div>
+
+                    <div class="contact__wrapper reveal">
+                        <div class="form-tabs">
+                            <button class="tab-btn active" data-target="comment-mode">💬 Komentar Publik</button>
+                            <button class="tab-btn" data-target="email-mode">📧 Email Pribadi</button>
+                        </div>
+
+                        <div id="comment-mode" class="form-content active">
+                            <form class="contact__form spotlight-card" id="comment-form">
+                                <div class="form__group">
+                                    <input type="text" class="form__input" id="comment-name" placeholder=" " required>
+                                    <label for="comment-name" class="form__label">Nama Kamu</label>
+                                </div>
+                                <div class="form__group">
+                                    <textarea class="form__input form__textarea" id="comment-text" placeholder=" "
+                                        required></textarea>
+                                    <label for="comment-text" class="form__label">Tulis Komentar...</label>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full">Kirim Komentar</button>
+                            </form>
+
+                            <div class="comments-display" id="comments-container">
+                                <div class="comment-item spotlight-card">
+                                    <div class="comment-header">
+                                        <span class="comment-author">Admin (ANH)</span>
+                                        <span class="comment-date">Pinned</span>
+                                    </div>
+                                    <p class="comment-body">Halo! Selamat datang di portfolio saya. Silakan tinggalkan
+                                        komentar di sini. 👋</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="email-mode" class="form-content">
+                            <form class="contact__form spotlight-card" id="contact-form">
+                                <div class="form__group">
+                                    <input type="text" class="form__input" id="name" placeholder=" " required>
+                                    <label for="name" class="form__label">Nama Lengkap</label>
+                                </div>
+                                <div class="form__group">
+                                    <input type="email" class="form__input" id="email" placeholder=" " required>
+                                    <label for="email" class="form__label">Email</label>
+                                </div>
+                                <div class="form__group">
+                                    <textarea class="form__input form__textarea" id="message" placeholder=" "
+                                        required></textarea>
+                                    <label for="message" class="form__label">Pesan Rahasia</label>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full">Kirim Pesan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="waves-container">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave"
+                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="var(--wave-color-1)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="var(--wave-color-2)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="var(--wave-color-3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--color-footer-bg)" />
+                </g>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="footer__content">
+                <a href="#" class="footer__logo">ANH</a>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    System Operational
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <a href="#" class="scrollup" id="scroll-up">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
+    </a>
+
+    <!-- Easter Egg Modal (Konami Code) -->
+    <div id="easter-egg-modal" class="easter-egg-modal">
+        <div class="easter-egg-content">
+            <button class="easter-egg-close" id="easter-egg-close">✕</button>
+            <div class="easter-egg-header">
+                <span class="easter-egg-icon">🎮</span>
+                <h2>🎉 Secret Unlocked!</h2>
+            </div>
+            <div class="easter-egg-body">
+                <p class="easter-egg-congrats">Selamat! Kamu menemukan Easter Egg rahasia!</p>
+                <div class="easter-egg-code">↑ ↑ ↓ ↓ ← → ← → B A</div>
+                <p class="easter-egg-message">Kamu adalah orang spesial yang penasaran. Terima kasih sudah mengunjungi
+                    portfolio saya! 🚀</p>
+                <div class="easter-egg-stats">
+                    <div class="egg-stat">
+                        <span class="egg-stat-icon">☕</span>
+                        <span class="egg-stat-text">999+ Kopi diminum</span>
+                    </div>
+                    <div class="egg-stat">
+                        <span class="egg-stat-icon">🐛</span>
+                        <span class="egg-stat-text">∞ Bug diperbaiki</span>
+                    </div>
+                    <div class="egg-stat">
+                        <span class="egg-stat-icon">💡</span>
+                        <span class="egg-stat-text">1000+ Ide brilian</span>
+                    </div>
+                </div>
+            </div>
+            <div class="easter-egg-footer">
+                <p>Made with ❤️ by ANH</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Palette (Ctrl+K) -->
+    <div id="command-palette" class="command-palette">
+        <div class="command-palette-content">
+            <div class="command-palette-header">
+                <span class="command-palette-icon">🔍</span>
+                <input type="text" id="command-input" class="command-input" placeholder="Ketik perintah atau cari..."
+                    autocomplete="off">
+                <span class="command-shortcut">ESC</span>
+            </div>
+            <div class="command-palette-results" id="command-results">
+                <div class="command-group">
+                    <span class="command-group-title">Navigasi</span>
+                    <div class="command-item" data-action="navigate" data-target="#home">
+                        <span class="command-item-icon">🏠</span>
+                        <span class="command-item-text">Home</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                    <div class="command-item" data-action="navigate" data-target="#tentang">
+                        <span class="command-item-icon">👤</span>
+                        <span class="command-item-text">About / Tentang Saya</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                    <div class="command-item" data-action="navigate" data-target="#projects">
+                        <span class="command-item-icon">💼</span>
+                        <span class="command-item-text">Projects / Proyek</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                    <div class="command-item" data-action="navigate" data-target="#contact">
+                        <span class="command-item-icon">📧</span>
+                        <span class="command-item-text">Contact / Hubungi Saya</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                </div>
+                <div class="command-group">
+                    <span class="command-group-title">Aksi</span>
+                    <div class="command-item" data-action="theme">
+                        <span class="command-item-icon">🌓</span>
+                        <span class="command-item-text">Toggle Dark/Light Mode</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                    <div class="command-item" data-action="print">
+                        <span class="command-item-icon">🖨️</span>
+                        <span class="command-item-text">Print Portfolio</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                    <div class="command-item" data-action="refresh">
+                        <span class="command-item-icon">🔄</span>
+                        <span class="command-item-text">Refresh Halaman</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                </div>
+                <div class="command-group">
+                    <span class="command-group-title">Sosial Media</span>
+                    <div class="command-item" data-action="link" data-url="https://instagram.com/mrphx._">
+                        <span class="command-item-icon">📸</span>
+                        <span class="command-item-text">Instagram</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                    <div class="command-item" data-action="link" data-url="https://github.com/H4SIBUAN">
+                        <span class="command-item-icon">💻</span>
+                        <span class="command-item-text">GitHub</span>
+                        <span class="command-item-shortcut">↵</span>
+                    </div>
+                </div>
+            </div>
+            <div class="command-palette-footer">
+                <span>💡 Tip: Tekan <kbd>Ctrl</kbd> + <kbd>K</kbd> untuk membuka Command Palette</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
