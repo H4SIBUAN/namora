@@ -599,14 +599,16 @@
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, query, orderBy, limit, onSnapshot, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-        // Firebase Configuration (Ganti ini jika sudah punya project Firebase)
+        // Firebase Configuration - portofolio-namora
         const firebaseConfig = {
-            apiKey: "PLACEHOLDER",
-            authDomain: "anh-portfolio.firebaseapp.com",
-            projectId: "anh-portfolio",
-            storageBucket: "anh-portfolio.appspot.com",
-            messagingSenderId: "PLACEHOLDER",
-            appId: "PLACEHOLDER"
+            apiKey: "AIzaSyDV4ul5oSeOyO8HPn65yAMh-3jVo4XA5Bw",
+            authDomain: "portofolio-namora.firebaseapp.com",
+            databaseURL: "https://portofolio-namora-default-rtdb.firebaseio.com",
+            projectId: "portofolio-namora",
+            storageBucket: "portofolio-namora.firebasestorage.app",
+            messagingSenderId: "840689511086",
+            appId: "1:840689511086:web:0e19a936e99fe0fdc09b3f",
+            measurementId: "G-QQCJSJ9SL0"
         };
 
         const app = initializeApp(firebaseConfig);
