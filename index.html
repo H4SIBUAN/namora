@@ -110,7 +110,7 @@
                                 <circle cx="12" cy="12" r="10" />
                                 <polygon points="10 8 16 12 10 16 10 8" />
                             </svg>
-                            Hobi
+                            aktivitas
                         </a>
                     </li>
                     <li class="nav__item">
@@ -242,13 +242,11 @@
                             <div class="terminal-header">
                                 <div class="terminal-buttons"><span class="close"></span><span
                                         class="minimize"></span><span class="maximize"></span></div>
-                                <span class="terminal-title">root@namora:~</span>
-                            </div>
-                            <div class="terminal-body" id="terminal-body">
-                                <p><span class="command">root@namora:~$</span> whoami</p>
-                                <p class="response">Siswa <strong>TKJ (Network Engineer)</strong> & Web Developer.</p>
-                                <p><span class="command">root@namora:~$</span> scan_visitor -v</p>
-                                <div id="scan-result"></div>
+                                <span class="terminal-title">root@H4SIBUAN
+                                    <p class="response">Siswa <strong>TKJ (Network Engineer)</strong> & Web Developer.
+                                    </p>
+                                    <p><span class="command">root@namora:~$</span> scan_visitor -v</p>
+                                    <div id="scan-result"></div>
                             </div>
                         </div>
                         <div class="stats-container">
@@ -264,6 +262,50 @@
                                 <h3 class="stat-number" data-target="100">0</h3>
                                 <p class="stat-title">Config Router</p>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Currently Status Panel -->
+                    <div class="about__status reveal">
+                        <div class="status-panel">
+                            <h3 class="status-panel__title">📍 Status Saat Ini</h3>
+
+                            <div class="status-item">
+                                <span class="status-item__icon">🔨</span>
+                                <div class="status-item__content">
+                                    <span class="status-item__label">Sedang mengerjakan</span>
+                                    <span class="status-item__value">Website Portfolio</span>
+                                </div>
+                            </div>
+
+                            <div class="status-item">
+                                <span class="status-item__icon">📚</span>
+                                <div class="status-item__content">
+                                    <span class="status-item__label">Fokus Belajar</span>
+                                    <span class="status-item__value">React.js & JavaScript</span>
+                                </div>
+                            </div>
+
+                            <div class="status-item">
+                                <span class="status-item__icon">🎯</span>
+                                <div class="status-item__content">
+                                    <span class="status-item__label">Target 2026</span>
+                                    <span class="status-item__value">Lulus SMK & Dapat Magang</span>
+                                </div>
+                            </div>
+
+                            <div class="status-item">
+                                <span class="status-item__icon">💡</span>
+                                <div class="status-item__content">
+                                    <span class="status-item__label">Tertarik dengan</span>
+                                    <span class="status-item__value">Full-Stack Development</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="availability-badge">
+                            <span class="availability-dot"></span>
+                            <span>Terbuka untuk Kolaborasi</span>
                         </div>
                     </div>
                 </div>
@@ -405,7 +447,7 @@
         <!-- Section: Hobi -->
         <section class="hobi section" id="hobi">
             <div class="container">
-                <h2 class="section__title reveal">Hobi & Minat</h2>
+                <h2 class="section__title reveal">aktivitas</h2>
                 <div class="hobi-cards reveal">
                     <!-- Pramuka Card with Gallery -->
                     <div class="hobi-card-wrapper">
@@ -415,75 +457,22 @@
                             <p>Kegiatan Kepramukaan</p>
                             <span class="expand-icon">▼</span>
                         </div>
-                        <div class="hobi-gallery">
-                            <div class="hobi-gallery__grid">
-                                <div class="hobi-gallery__item">
-                                    <img src="img/pramuka1.jpg" alt="Kegiatan Pramuka 1"
-                                        onerror="this.src='https://via.placeholder.com/200x150/7C3AED/FFFFFF?text=Pramuka+1'">
-                                    <span class="hobi-gallery__caption">Kegiatan Kemah</span>
+                        <div class="hobi-gallery pramuka-gallery">
+                            <div class="hobi-gallery__grid pramuka-grid">
+                                <div class="hobi-gallery__item pramuka-item" onclick="openLightbox('img/pramuka1.jpg')">
+                                    <img src="img/pramuka1.jpg" alt="Kegiatan Pramuka">
                                 </div>
-                                <div class="hobi-gallery__item">
-                                    <img src="img/pramuka2.jpg" alt="Kegiatan Pramuka 2"
-                                        onerror="this.src='https://via.placeholder.com/200x150/7C3AED/FFFFFF?text=Pramuka+2'">
-                                    <span class="hobi-gallery__caption">Upacara</span>
+                                <div class="hobi-gallery__item pramuka-item" onclick="openLightbox('img/pramuka2.jpg')">
+                                    <img src="img/pramuka2.jpg" alt="Kegiatan Pramuka">
                                 </div>
-                                <div class="hobi-gallery__item">
-                                    <img src="img/pramuka3.jpg" alt="Kegiatan Pramuka 3"
-                                        onerror="this.src='https://via.placeholder.com/200x150/7C3AED/FFFFFF?text=Pramuka+3'">
-                                    <span class="hobi-gallery__caption">Latihan Rutin</span>
+                                <div class="hobi-gallery__item pramuka-item" onclick="openLightbox('img/pramuka3.jpg')">
+                                    <img src="img/pramuka3.jpg" alt="Kegiatan Pramuka">
                                 </div>
-                                <div class="hobi-gallery__item">
-                                    <img src="img/pramuka4.jpg" alt="Kegiatan Pramuka 4"
-                                        onerror="this.src='https://via.placeholder.com/200x150/7C3AED/FFFFFF?text=Pramuka+4'">
-                                    <span class="hobi-gallery__caption">Jambore</span>
+                                <div class="hobi-gallery__item pramuka-item" onclick="openLightbox('img/pramuka4.jpg')">
+                                    <img src="img/pramuka4.jpg" alt="Kegiatan Pramuka">
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Membaca Card with Gallery -->
-                    <div class="hobi-card-wrapper">
-                        <div class="hobi-card expandable" onclick="toggleHobiGallery(this)">
-                            <span class="hobi-icon">📚</span>
-                            <h4>Membaca</h4>
-                            <p>Teknologi & Fiksi</p>
-                            <span class="expand-icon">▼</span>
-                        </div>
-                        <div class="hobi-gallery">
-                            <div class="hobi-gallery__grid">
-                                <div class="hobi-gallery__item">
-                                    <img src="img/buku1.jpg" alt="Buku Favorit 1"
-                                        onerror="this.src='https://via.placeholder.com/200x150/2563EB/FFFFFF?text=Buku+1'">
-                                    <span class="hobi-gallery__caption">Buku Teknologi</span>
-                                </div>
-                                <div class="hobi-gallery__item">
-                                    <img src="img/buku2.jpg" alt="Buku Favorit 2"
-                                        onerror="this.src='https://via.placeholder.com/200x150/2563EB/FFFFFF?text=Buku+2'">
-                                    <span class="hobi-gallery__caption">Novel Fiksi</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Musik Card with Gallery -->
-                    <div class="hobi-card-wrapper">
-                        <div class="hobi-card expandable" onclick="toggleHobiGallery(this)">
-                            <span class="hobi-icon">🎵</span>
-                            <h4>Musik</h4>
-                            <p>Pop & Rock</p>
-                            <span class="expand-icon">▼</span>
-                        </div>
-                        <div class="hobi-gallery">
-                            <div class="hobi-gallery__grid">
-                                <div class="hobi-gallery__item">
-                                    <img src="img/musik1.jpg" alt="Musik 1"
-                                        onerror="this.src='https://via.placeholder.com/200x150/D946EF/FFFFFF?text=Musik+1'">
-                                    <span class="hobi-gallery__caption">Playlist Favorit</span>
-                                </div>
-                                <div class="hobi-gallery__item">
-                                    <img src="img/musik2.jpg" alt="Musik 2"
-                                        onerror="this.src='https://via.placeholder.com/200x150/D946EF/FFFFFF?text=Musik+2'">
-                                    <span class="hobi-gallery__caption">Konser</span>
+                                <div class="hobi-gallery__item pramuka-item" onclick="openLightbox('img/pramuka5.jpg')">
+                                    <img src="img/pramuka5.jpg" alt="Kegiatan Pramuka">
                                 </div>
                             </div>
                         </div>
@@ -491,6 +480,12 @@
                 </div>
             </div>
         </section>
+
+        <!-- Lightbox Modal for Photos -->
+        <div id="photo-lightbox" class="photo-lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img id="lightbox-img" class="lightbox-content" src="" alt="Foto">
+        </div>
 
         <div class="tech-slider">
             <div class="slide-track">
@@ -530,11 +525,12 @@
         <section class="education section" id="pendidikan">
             <div class="container">
                 <h2 class="section__title reveal">Riwayat Pendidikan</h2>
-                <p class="section__subtitle reveal">Perjalanan akademik saya dari SD hingga SMK</p>
+                <p class="section__subtitle reveal">Perjalanan akademik saya dari SD hingga SMK - Klik untuk mengunjungi
+                    website sekolah</p>
 
                 <div class="education__timeline">
                     <!-- SD -->
-                    <div class="education__item reveal">
+                    <a href="#" class="education__item reveal education__link" title="Website sekolah belum tersedia">
                         <div class="education__logo">
                             <img src="img/logo-sd.png" alt="Logo SDIT Roudhtul Jannah"
                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -550,10 +546,11 @@
                             <p class="education__desc">Sekolah Dasar Islam Terpadu yang membentuk karakter dan pondasi
                                 pendidikan awal saya.</p>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- SMP -->
-                    <div class="education__item reveal">
+                    <a href="https://smpn10kotabekasi.sch.id/" target="_blank" rel="noopener noreferrer"
+                        class="education__item reveal education__link" title="Kunjungi website SMPN 10 Kota Bekasi">
                         <div class="education__logo">
                             <img src="img/logo-smp.png" alt="Logo SMPN 10 Kota Bekasi"
                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -568,11 +565,13 @@
                             <p class="education__location">📍 Kota Bekasi</p>
                             <p class="education__desc">Mengembangkan kemampuan akademik dan mulai tertarik dengan dunia
                                 teknologi.</p>
+                            <span class="education__visit-hint">🔗 Klik untuk mengunjungi website</span>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- SMK -->
-                    <div class="education__item reveal">
+                    <a href="https://smkn2kotabekasi.sch.id/" target="_blank" rel="noopener noreferrer"
+                        class="education__item reveal education__link" title="Kunjungi website SMKN 2 Kota Bekasi">
                         <div class="education__logo">
                             <img src="img/logo-smk.png" alt="Logo SMKN 2 Kota Bekasi"
                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -587,8 +586,9 @@
                             <p class="education__location">📍 Kota Bekasi</p>
                             <p class="education__desc">Jurusan Teknik Komputer dan Jaringan (TKJ). Fokus pada Network
                                 Engineering dan Web Development.</p>
+                            <span class="education__visit-hint">🔗 Klik untuk mengunjungi website</span>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -732,7 +732,7 @@
                         <div class="contact__card spotlight-card">
                             <span class="contact__card-icon">📧</span>
                             <h3 class="contact__card-title">Email</h3>
-                            <p class="contact__card-text">ardiansyahnamorahasibuan@email.com</p>
+                            <p class="contact__card-text">ardiansyahnamorahasibuan@gmail.com</p>
                         </div>
                         <div class="contact__card spotlight-card">
                             <span class="contact__card-icon">📍</span>
@@ -774,18 +774,24 @@
                         </div>
 
                         <div id="email-mode" class="form-content">
-                            <form class="contact__form spotlight-card" id="contact-form">
+                            <form class="contact__form spotlight-card" id="contact-form"
+                                action="https://formsubmit.co/ardiansyahnamorahasibuan@gmail.com" method="POST">
+                                <input type="hidden" name="_subject" value="Pesan Baru dari Portfolio (Private Email)!">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="hidden" name="_template" value="table">
                                 <div class="form__group">
-                                    <input type="text" class="form__input" id="name" placeholder=" " required>
+                                    <input type="text" class="form__input" id="name" name="name" placeholder=" "
+                                        required>
                                     <label for="name" class="form__label">Nama Lengkap</label>
                                 </div>
                                 <div class="form__group">
-                                    <input type="email" class="form__input" id="email" placeholder=" " required>
+                                    <input type="email" class="form__input" id="email" name="email" placeholder=" "
+                                        required>
                                     <label for="email" class="form__label">Email</label>
                                 </div>
                                 <div class="form__group">
-                                    <textarea class="form__input form__textarea" id="message" placeholder=" "
-                                        required></textarea>
+                                    <textarea class="form__input form__textarea" id="message" name="message"
+                                        placeholder=" " required></textarea>
                                     <label for="message" class="form__label">Pesan Rahasia</label>
                                 </div>
                                 <button type="submit" class="btn btn--primary btn--full">Kirim Pesan</button>

@@ -1,44 +1,58 @@
 /* ========================================
    PORTFOLIO INTERACTIVE SCRIPT
    Author: Ardiansyah Namora H.
-   Updated: FIXED ACTIVE LINK ON SCROLL & FIREBASE
+   Updated: OPTIMIZED PERFORMANCE & CONTENT 2026
    ======================================== */
 
-// 1. IMPORT FIREBASE
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, push, onChildAdded, remove, get, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+// 1. IMPORT FIREBASE (Dynamic Import handled inside initFirebase)
+// Removed static imports to prevent blocking UI on load error
 
-// 2. KONFIGURASI FIREBASE KAMU
-const firebaseConfig = {
-    apiKey: "AIzaSyDV4ul5oSeOyO8HPn65yAMh-3jVo4XA5Bw",
-    authDomain: "portofolio-namora.firebaseapp.com",
-    databaseURL: "https://portofolio-namora-default-rtdb.firebaseio.com",
-    projectId: "portofolio-namora",
-    storageBucket: "portofolio-namora.firebasestorage.app",
-    messagingSenderId: "840689511086",
-    appId: "1:840689511086:web:0e19a936e99fe0fdc09b3f",
-    measurementId: "G-QQCJSJ9SL0"
+// --- PERFORMANCE UTILITIES ---
+
+// Throttle function to limit execution frequency
+const throttle = (func, limit) => {
+    let inThrottle;
+    return function (...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
 };
 
-// 3. INISIALISASI DATABASE
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const commentsRef = ref(db, 'comments');
-const visitorCountRef = ref(db, 'visitorCount');
+// Debounce function for delayed execution
+const debounce = (func, wait) => {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+};
 
 // --- LOGIC UTAMA WEBSITE ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ========================================
-       A. NAVIGATION ACTIVE LINK ON SCROLL
-       ======================================== */
-    const sections = document.querySelectorAll('section[id]');
+    // Cache frequently used DOM elements
+    const cachedElements = {
+        sections: document.querySelectorAll('section[id]'),
+        navLinks: document.querySelectorAll('.nav__link'),
+        header: document.querySelector('.header'),
+        scrollProgressBar: document.getElementById('scroll-progress'),
+        navMenu: document.getElementById('nav-menu'),
+        navToggle: document.getElementById('nav-toggle'),
+        navClose: document.getElementById('nav-close'),
+        scrollUp: document.getElementById('scroll-up')
+    };
 
-    function scrollActive() {
+    /* ========================================
+       A. NAVIGATION ACTIVE LINK ON SCROLL (OPTIMIZED)
+       ======================================== */
+    const scrollActive = () => {
         const scrollY = window.scrollY;
 
-        sections.forEach(current => {
+        cachedElements.sections.forEach(current => {
             const sectionHeight = current.offsetHeight;
             const sectionTop = current.offsetTop - 100;
             const sectionId = current.getAttribute('id');
@@ -46,31 +60,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (sectionsClass) {
                 if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav__link').forEach(link => link.classList.remove('active-link'));
+                    cachedElements.navLinks.forEach(link => link.classList.remove('active-link'));
                     sectionsClass.classList.add('active-link');
                 }
             }
         });
-    }
-    window.addEventListener('scroll', scrollActive);
+    };
+
+    // Throttled scroll handler - runs max every 100ms
+    const throttledScrollActive = throttle(scrollActive, 100);
+    window.addEventListener('scroll', throttledScrollActive, { passive: true });
 
 
     /* ========================================
-       B. VARIABLES & SCROLL PROGRESS
+       B. VARIABLES & SCROLL PROGRESS (OPTIMIZED)
        ======================================== */
-    const navMenu = document.getElementById('nav-menu');
-    const navToggle = document.getElementById('nav-toggle');
-    const navClose = document.getElementById('nav-close');
-    const navLinks = document.querySelectorAll('.nav__link');
-    const header = document.querySelector('.header');
-    const scrollProgressBar = document.getElementById('scroll-progress');
+    const navMenu = cachedElements.navMenu;
+    const navToggle = cachedElements.navToggle;
+    const navClose = cachedElements.navClose;
+    const navLinks = cachedElements.navLinks;
+    const header = cachedElements.header;
+    const scrollProgressBar = cachedElements.scrollProgressBar;
 
-    window.addEventListener('scroll', () => {
+    // Optimized scroll progress with requestAnimationFrame
+    let ticking = false;
+    const updateScrollProgress = () => {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (scrollTop / scrollHeight) * 100;
         if (scrollProgressBar) scrollProgressBar.style.width = scrolled + "%";
-    });
+        ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollProgress);
+            ticking = true;
+        }
+    }, { passive: true });
 
     /* ========================================
        C. DIGITAL CLOCK (REAL-TIME)
@@ -112,26 +139,75 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ========================================
        E. NAVIGATION & HEADER EFFECTS
        ======================================== */
-    if (navToggle) navToggle.addEventListener('click', () => navMenu.classList.add('active'));
-    if (navClose) navClose.addEventListener('click', () => navMenu.classList.remove('active'));
+    // Validate that elements exist before adding listeners
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.add('show-menu');
+        });
+    }
 
-    navLinks.forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
+    if (navClose && navMenu) {
+        navClose.addEventListener('click', () => {
+            navMenu.classList.remove('show-menu');
+        });
+    }
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY >= 50) header.style.boxShadow = "0 2px 10px var(--color-shadow)";
-        else header.style.boxShadow = "none";
-    });
+    // Auto-close menu when a link is clicked
+    if (navLinks) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu) navMenu.classList.remove('show-menu');
+            });
+        });
+    }
 
-    const scrollUp = document.getElementById('scroll-up');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY >= 350) scrollUp.classList.add('show-scroll');
-        else scrollUp.classList.remove('show-scroll');
-    });
+    // Consolidated scroll effects (header shadow + scroll-up button)
+    const scrollUp = cachedElements.scrollUp;
+    const handleScrollEffects = throttle(() => {
+        const scrollY = window.scrollY;
+
+        // Header shadow
+        if (header) {
+            header.style.boxShadow = scrollY >= 50 ? "0 2px 10px var(--color-shadow)" : "none";
+        }
+
+        // Scroll-up button visibility
+        if (scrollUp) {
+            scrollUp.classList.toggle('show-scroll', scrollY >= 350);
+        }
+    }, 100);
+
+    window.addEventListener('scroll', handleScrollEffects, { passive: true });
 
     /* ========================================
-       F. SCROLL REVEAL & COUNTERS
+       F. SCROLL REVEAL & COUNTERS (OPTIMIZED)
        ======================================== */
     const revealElements = document.querySelectorAll(".reveal, .skill__progress, .stat-number, .skill__number");
+
+    // Use requestAnimationFrame for smoother counter animations
+    const animateCounterRAF = (element, target, isPercentage) => {
+        const duration = 1500; // 1.5 seconds
+        const startTime = performance.now();
+        const startValue = 0;
+
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function for smooth animation
+            const easeOutQuad = progress * (2 - progress);
+            const currentValue = Math.ceil(startValue + (target - startValue) * easeOutQuad);
+
+            element.innerText = currentValue + (isPercentage ? "%" : "+");
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        requestAnimationFrame(animate);
+    };
+
     const revealOnScroll = () => {
         const windowHeight = window.innerHeight;
         const elementVisible = 100;
@@ -141,24 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 reveal.classList.add("active");
                 if ((reveal.classList.contains('stat-number') || reveal.classList.contains('skill__number')) && !reveal.classList.contains('counted')) {
                     const target = +reveal.getAttribute('data-target');
-                    const increment = target / 50;
-                    let current = 0;
-                    const updateCounter = () => {
-                        current += increment;
-                        if (current < target) {
-                            reveal.innerText = Math.ceil(current) + (reveal.classList.contains('skill__number') ? "%" : "+");
-                            setTimeout(updateCounter, 30);
-                        } else {
-                            reveal.innerText = target + (reveal.classList.contains('skill__number') ? "%" : "+");
-                        }
-                    };
-                    updateCounter();
+                    const isPercentage = reveal.classList.contains('skill__number');
+                    animateCounterRAF(reveal, target, isPercentage);
                     reveal.classList.add('counted');
                 }
             }
         });
     };
-    window.addEventListener("scroll", revealOnScroll);
+
+    // Throttled scroll reveal
+    const throttledReveal = throttle(revealOnScroll, 100);
+    window.addEventListener("scroll", throttledReveal, { passive: true });
     revealOnScroll();
 
     /* ========================================
@@ -242,84 +311,164 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* 
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            if (name) {
-                showNotification(`Pesan terkirim, ${name}! (Mode Demo)`, 'success');
-                contactForm.reset();
-            }
+            // e.preventDefault(); // DISABLED: Allow Formsubmit.co to handle it
+            // const name = document.getElementById('name').value;
+            // if (name) {
+            //    showNotification(`Pesan terkirim! Silakan cek email untuk aktivasi (jika pertama kali).`, 'success');
+            //    // contactForm.reset(); 
+            // }
         });
     }
+    */
 
     /* ========================================
-       K. FIREBASE COMMENT SYSTEM
+       K. FIREBASE SYSTEM (ASYNC LOADER)
        ======================================== */
-    const commentForm = document.getElementById('comment-form');
-    const commentsContainer = document.getElementById('comments-container');
+    const initFirebase = async () => {
+        try {
+            // Dynamic Imports
+            const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js");
+            const { getDatabase, ref, push, onChildAdded, remove, get, set, onValue } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js");
 
-    const renderComment = (key, name, text, date) => {
-        const div = document.createElement('div');
-        div.className = 'comment-item spotlight-card';
-        div.id = key;
-        div.innerHTML = `
-            <div class="comment-header">
-                <span class="comment-author">${name}</span>
-                <span class="comment-date">${date}</span>
-                <button class="delete-btn" data-key="${key}" aria-label="Hapus">❌</button>
-            </div>
-            <p class="comment-body">${text}</p>
-        `;
-        if (commentsContainer.children.length > 1) {
-            commentsContainer.insertBefore(div, commentsContainer.children[1]);
-        } else {
-            commentsContainer.appendChild(div);
+            const firebaseConfig = {
+                apiKey: "AIzaSyDV4ul5oSeOyO8HPn65yAMh-3jVo4XA5Bw",
+                authDomain: "portofolio-namora.firebaseapp.com",
+                databaseURL: "https://portofolio-namora-default-rtdb.firebaseio.com",
+                projectId: "portofolio-namora",
+                storageBucket: "portofolio-namora.firebasestorage.app",
+                messagingSenderId: "840689511086",
+                appId: "1:840689511086:web:0e19a936e99fe0fdc09b3f",
+                measurementId: "G-QQCJSJ9SL0"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+            const commentsRef = ref(db, 'comments');
+            const visitorCountRef = ref(db, 'visitorCount');
+
+            // --- COMMENT SYSTEM ---
+            const commentForm = document.getElementById('comment-form');
+            const commentsContainer = document.getElementById('comments-container');
+
+            // Function to delete comment
+            const deleteComment = (key, element) => {
+                const password = prompt("🔒 Masukkan Password Admin:");
+                if (password === "admin123") {
+                    if (confirm("Yakin ingin menghapus komentar ini dari database?")) {
+                        const itemRef = ref(db, `comments/${key}`);
+                        remove(itemRef)
+                            .then(() => {
+                                element.remove();
+                                showNotification("Komentar dihapus permanen.", "success");
+                            })
+                            .catch((error) => {
+                                alert("Gagal menghapus: " + error.message);
+                            });
+                    }
+                } else if (password !== null) {
+                    alert("⛔ Akses Ditolak! Password salah.");
+                }
+            };
+
+            const renderComment = (key, name, text, date) => {
+                const div = document.createElement('div');
+                div.className = 'comment-item spotlight-card';
+                div.id = key;
+                div.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-author">${name}</span>
+                    <span class="comment-date">${date}</span>
+                    <button class="delete-btn" data-key="${key}" aria-label="Hapus">❌</button>
+                </div>
+                <p class="comment-body">${text}</p>
+            `;
+                if (commentsContainer.children.length > 1) {
+                    commentsContainer.insertBefore(div, commentsContainer.children[1]);
+                } else {
+                    commentsContainer.appendChild(div);
+                }
+                const delBtn = div.querySelector('.delete-btn');
+                delBtn.addEventListener('click', () => deleteComment(key, div));
+            };
+
+            onChildAdded(commentsRef, (snapshot) => {
+                const data = snapshot.val();
+                renderComment(snapshot.key, data.name, data.text, data.date);
+            });
+
+            if (commentForm) {
+                // Remove old listener to prevent duplicates if re-initialized (unlikely here but good practice)
+                const newForm = commentForm.cloneNode(true);
+                commentForm.parentNode.replaceChild(newForm, commentForm);
+
+                newForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('comment-name').value;
+                    const text = document.getElementById('comment-text').value;
+                    if (name && text) {
+                        const now = new Date();
+                        const dateString = now.toLocaleDateString('id-ID') + ' ' + now.toLocaleTimeString('id-ID').slice(0, 5);
+                        push(commentsRef, { name: name, text: text, date: dateString });
+                        showNotification('Komentar berhasil diposting!', 'success');
+                        newForm.reset();
+                    }
+                });
+            }
+
+            // --- VISITOR COUNTER ---
+            const visitorCountDisplay = document.getElementById('visitor-count');
+            const sessionKey = 'visitor_counted';
+            const hasBeenCounted = sessionStorage.getItem(sessionKey);
+
+            function animateCounter(element, target) {
+                const current = parseInt(element.textContent) || 0;
+                if (current === target) return;
+                const increment = target > current ? 1 : -1;
+                const step = Math.abs(target - current) > 50 ? Math.ceil(Math.abs(target - current) / 30) : 1;
+                let value = current;
+                const timer = setInterval(() => {
+                    value += step * increment;
+                    if ((increment > 0 && value >= target) || (increment < 0 && value <= target)) {
+                        value = target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = value.toLocaleString();
+                }, 30);
+            }
+
+            onValue(visitorCountRef, (snapshot) => {
+                const count = snapshot.val() || 0;
+                if (visitorCountDisplay) {
+                    animateCounter(visitorCountDisplay, count);
+                }
+            });
+
+            if (!hasBeenCounted) {
+                get(visitorCountRef).then((snapshot) => {
+                    const currentCount = snapshot.val() || 0;
+                    set(visitorCountRef, currentCount + 1);
+                    sessionStorage.setItem(sessionKey, 'true');
+                }).catch((error) => {
+                    console.log('Visitor count error:', error);
+                });
+            }
+
+            console.log("✅ Firebase Connected Successfully");
+
+        } catch (error) {
+            console.warn("⚠️ Firebase failed to load (Offline Mode):", error);
+            const visitorCountDisplay = document.getElementById('visitor-count');
+            if (visitorCountDisplay) visitorCountDisplay.textContent = "-";
+            showNotification("Mode Offline: Database tidak terhubung", "error");
         }
-        const delBtn = div.querySelector('.delete-btn');
-        delBtn.addEventListener('click', () => deleteComment(key, div));
     };
 
-    onChildAdded(commentsRef, (snapshot) => {
-        const data = snapshot.val();
-        renderComment(snapshot.key, data.name, data.text, data.date);
-    });
-
-    if (commentForm) {
-        commentForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('comment-name').value;
-            const text = document.getElementById('comment-text').value;
-            if (name && text) {
-                const now = new Date();
-                const dateString = now.toLocaleDateString('id-ID') + ' ' + now.toLocaleTimeString('id-ID').slice(0, 5);
-                push(commentsRef, { name: name, text: text, date: dateString });
-                showNotification('Komentar berhasil diposting!', 'success');
-                commentForm.reset();
-            }
-        });
-    }
-
-    // Function to delete comment
-    const deleteComment = (key, element) => {
-        const password = prompt("🔒 Masukkan Password Admin:");
-        if (password === "admin123") {
-            if (confirm("Yakin ingin menghapus komentar ini dari database?")) {
-                const itemRef = ref(db, `comments/${key}`);
-                remove(itemRef)
-                    .then(() => {
-                        element.remove();
-                        showNotification("Komentar dihapus permanen.", "success");
-                    })
-                    .catch((error) => {
-                        alert("Gagal menghapus: " + error.message);
-                    });
-            }
-        } else if (password !== null) {
-            alert("⛔ Akses Ditolak! Password salah.");
-        }
-    };
+    // Initialize Firebase independently
+    initFirebase();
 
     /* ========================================
        L. IP & ISP DETECTOR (TERMINAL)
@@ -344,19 +493,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     i++;
                 } else {
                     clearInterval(printLog);
-                    fetch('https://ipapi.co/json/')
-                        .then(response => response.json())
+                    clearInterval(printLog);
+
+                    const fetchIP = async () => {
+                        try {
+                            // Try primary API
+                            const response = await fetch('https://ipapi.co/json/');
+                            if (!response.ok) throw new Error('Primary API failed');
+                            const data = await response.json();
+                            return data;
+                        } catch (e) {
+                            // Try fallback API
+                            try {
+                                const response = await fetch('https://ipwho.is/');
+                                if (!response.ok) throw new Error('Fallback API failed');
+                                const data = await response.json();
+                                return data;
+                            } catch (err) {
+                                throw err;
+                            }
+                        }
+                    };
+
+                    fetchIP()
                         .then(data => {
                             const infoHTML = `
                                 <p class="response text-green"> > [SUCCESS] Target Identified!</p>
                                 <p class="response"> > <strong>IP Address:</strong> ${data.ip}</p>
-                                <p class="response"> > <strong>Location:</strong> ${data.city}, ${data.country_name}</p>
-                                <p class="response"> > <strong>ISP:</strong> ${data.org}</p>
+                                <p class="response"> > <strong>Location:</strong> ${data.city || data.city_name}, ${data.country || data.country_name}</p>
+                                <p class="response"> > <strong>ISP:</strong> ${data.org || data.connection?.isp}</p>
                             `;
                             resultContainer.innerHTML += infoHTML;
                         })
                         .catch(err => {
-                            resultContainer.innerHTML += `<p class="response" style="color:red;"> > [ERROR] Scan blocked by firewall.</p>`;
+                            resultContainer.innerHTML += `<p class="response" style="color: orange;"> > [INFO] Network scan skipped (Privacy Mode).</p>`;
                         });
                 }
             }, 800);
@@ -364,23 +534,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
 
     /* ========================================
-       M. PARTICLES.JS (Classic Professional)
+       M. PARTICLES.JS (Wallpaper Mode - Non-Interactive)
        ======================================== */
     if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
+        // Make particles container non-interactive via CSS
+        const particlesContainer = document.getElementById('particles-js');
+        particlesContainer.style.pointerEvents = 'none';
+
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 60, "density": { "enable": true, "value_area": 900 } },
                 "color": { "value": "#2563EB" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": false },
+                "opacity": { "value": 0.4, "random": true },
                 "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#06B6D4", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+                "line_linked": { "enable": true, "distance": 150, "color": "#06B6D4", "opacity": 0.3, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
             },
             "interactivity": {
-                "detect_on": "window",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 } }
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": false, "mode": "grab" },
+                    "onclick": { "enable": false, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {}
             },
             "retina_detect": true
         });
@@ -583,44 +761,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ========================================
-       P. VISITOR COUNTER
+       P. VISITOR COUNTER (Moved to initFirebase)
        ======================================== */
-    const visitorCountDisplay = document.getElementById('visitor-count');
-    const sessionKey = 'visitor_counted';
-    const hasBeenCounted = sessionStorage.getItem(sessionKey);
-
-    onValue(visitorCountRef, (snapshot) => {
-        const count = snapshot.val() || 0;
-        if (visitorCountDisplay) {
-            animateCounter(visitorCountDisplay, count);
-        }
-    });
-
-    if (!hasBeenCounted) {
-        get(visitorCountRef).then((snapshot) => {
-            const currentCount = snapshot.val() || 0;
-            set(visitorCountRef, currentCount + 1);
-            sessionStorage.setItem(sessionKey, 'true');
-        }).catch((error) => {
-            console.log('Visitor count error:', error);
-        });
-    }
-
-    function animateCounter(element, target) {
-        const current = parseInt(element.textContent) || 0;
-        if (current === target) return;
-        const increment = target > current ? 1 : -1;
-        const step = Math.abs(target - current) > 50 ? Math.ceil(Math.abs(target - current) / 30) : 1;
-        let value = current;
-        const timer = setInterval(() => {
-            value += step * increment;
-            if ((increment > 0 && value >= target) || (increment < 0 && value <= target)) {
-                value = target;
-                clearInterval(timer);
-            }
-            element.textContent = value.toLocaleString();
-        }, 30);
-    }
+    // Logic merged into initFirebase to share DB connection
 
 
     console.log("✅ Portfolio System Online (Professional Mode)");
@@ -718,3 +861,32 @@ window.toggleHobiGallery = function (card) {
         gallery.classList.add('active');
     }
 }
+
+// ========================================
+//    PHOTO LIGHTBOX FUNCTIONS
+// ========================================
+window.openLightbox = function (imageSrc) {
+    event.stopPropagation(); // Prevent gallery from closing
+    const lightbox = document.getElementById('photo-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    if (lightbox && lightboxImg) {
+        lightboxImg.src = imageSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+}
+
+window.closeLightbox = function () {
+    const lightbox = document.getElementById('photo-lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
