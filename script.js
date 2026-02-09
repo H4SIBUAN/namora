@@ -471,169 +471,19 @@ document.addEventListener('DOMContentLoaded', () => {
     initFirebase();
 
     /* ========================================
-       L. IP & ISP DETECTOR (TERMINAL)
+       L. IP & ISP DETECTOR - REMOVED FOR PERFORMANCE
        ======================================== */
-    setTimeout(() => {
-        const resultContainer = document.getElementById('scan-result');
-        if (resultContainer) {
-            const messages = [
-                "> Initializing network scan...",
-                "> Resolving host address...",
-                "> Connection established.",
-                "> Fetching public data..."
-            ];
-
-            let i = 0;
-            const printLog = setInterval(() => {
-                if (i < messages.length) {
-                    const p = document.createElement('p');
-                    p.className = 'response';
-                    p.innerText = messages[i];
-                    resultContainer.appendChild(p);
-                    i++;
-                } else {
-                    clearInterval(printLog);
-                    clearInterval(printLog);
-
-                    const fetchIP = async () => {
-                        try {
-                            // Try primary API
-                            const response = await fetch('https://ipapi.co/json/');
-                            if (!response.ok) throw new Error('Primary API failed');
-                            const data = await response.json();
-                            return data;
-                        } catch (e) {
-                            // Try fallback API
-                            try {
-                                const response = await fetch('https://ipwho.is/');
-                                if (!response.ok) throw new Error('Fallback API failed');
-                                const data = await response.json();
-                                return data;
-                            } catch (err) {
-                                throw err;
-                            }
-                        }
-                    };
-
-                    fetchIP()
-                        .then(data => {
-                            const infoHTML = `
-                                <p class="response text-green"> > [SUCCESS] Target Identified!</p>
-                                <p class="response"> > <strong>IP Address:</strong> ${data.ip}</p>
-                                <p class="response"> > <strong>Location:</strong> ${data.city || data.city_name}, ${data.country || data.country_name}</p>
-                                <p class="response"> > <strong>ISP:</strong> ${data.org || data.connection?.isp}</p>
-                            `;
-                            resultContainer.innerHTML += infoHTML;
-                        })
-                        .catch(err => {
-                            resultContainer.innerHTML += `<p class="response" style="color: orange;"> > [INFO] Network scan skipped (Privacy Mode).</p>`;
-                        });
-                }
-            }, 800);
-        }
-    }, 2000);
+    // Terminal effect removed to prevent main thread blocking
 
     /* ========================================
-       M. PARTICLES.JS (Wallpaper Mode - Non-Interactive)
+       M. PARTICLES.JS - REMOVED FOR PERFORMANCE
        ======================================== */
-    if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
-        // Make particles container non-interactive via CSS
-        const particlesContainer = document.getElementById('particles-js');
-        particlesContainer.style.pointerEvents = 'none';
-
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 900 } },
-                "color": { "value": "#2563EB" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.4, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#06B6D4", "opacity": 0.3, "width": 1 },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": { "enable": false, "mode": "grab" },
-                    "onclick": { "enable": false, "mode": "push" },
-                    "resize": true
-                },
-                "modes": {}
-            },
-            "retina_detect": true
-        });
-    }
+    // Particles configuration removed
 
     /* ========================================
-       N. EASTER EGG - KONAMI CODE
+       N. EASTER EGG - REMOVED FOR PERFORMANCE
        ======================================== */
-    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
-    let konamiIndex = 0;
-    const easterEggModal = document.getElementById('easter-egg-modal');
-    const easterEggClose = document.getElementById('easter-egg-close');
-
-    document.addEventListener('keydown', (e) => {
-        if (e.code === konamiCode[konamiIndex]) {
-            konamiIndex++;
-            if (konamiIndex === konamiCode.length) {
-                easterEggModal.classList.add('active');
-                konamiIndex = 0;
-                showNotification('🎮 Konami Code Activated!', 'success');
-                createConfetti();
-            }
-        } else {
-            konamiIndex = 0;
-        }
-    });
-
-    if (easterEggClose) {
-        easterEggClose.addEventListener('click', () => {
-            easterEggModal.classList.remove('active');
-        });
-    }
-
-    if (easterEggModal) {
-        easterEggModal.addEventListener('click', (e) => {
-            if (e.target === easterEggModal) {
-                easterEggModal.classList.remove('active');
-            }
-        });
-    }
-
-    function createConfetti() {
-        const colors = ['#ff6b6b', '#ffd93d', '#6bcf7f', '#4d9de0', '#7b5cd6', '#ff00c8'];
-        for (let i = 0; i < 100; i++) {
-            const confetti = document.createElement('div');
-            confetti.style.cssText = `
-                position: fixed;
-                width: ${Math.random() * 10 + 5}px;
-                height: ${Math.random() * 10 + 5}px;
-                background: ${colors[Math.floor(Math.random() * colors.length)]};
-                left: ${Math.random() * 100}vw;
-                top: -20px;
-                border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
-                z-index: 100000;
-                pointer-events: none;
-                animation: confettiFall ${Math.random() * 3 + 2}s linear forwards;
-            `;
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
-        }
-
-        if (!document.getElementById('confetti-style')) {
-            const style = document.createElement('style');
-            style.id = 'confetti-style';
-            style.textContent = `
-                @keyframes confettiFall {
-                    to {
-                        transform: translateY(100vh) rotate(720deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-    }
+    // Konami code listener removed
 
     /* ========================================
        O. COMMAND PALETTE (Ctrl+K)
@@ -795,16 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ====================
     // PARALLAX MOUSE EFFECT
     // ====================
-    const parallaxSections = document.querySelectorAll('.section');
-    parallaxSections.forEach(section => {
-        section.addEventListener('mousemove', (e) => {
-            const rect = section.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            section.style.setProperty('--mouse-x', `${x}%`);
-            section.style.setProperty('--mouse-y', `${y}%`);
-        });
-    });
+    // Parallax Effect Removed for Performance
 
     const aboutInfoElements = document.querySelectorAll('.about__info');
     aboutInfoElements.forEach(el => el.classList.add('from-left'));
