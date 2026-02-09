@@ -3799,7 +3799,8 @@ textarea {
    NEW FOOTER DESIGN (Syncode Style)
    ======================================== */
 .footer {
-    background-color: #050505;
+    background-color: #020617;
+    /* Darker slate/black to match site theme better */
     color: #cbd5e1;
     padding: 4rem 0 2rem;
     font-size: 0.9rem;
@@ -3825,7 +3826,8 @@ textarea {
 }
 
 .footer__brand i {
-    color: #eab308;
+    color: var(--color-secondary);
+    /* Updated */
     font-size: 1.5rem;
 }
 
@@ -3854,9 +3856,11 @@ textarea {
 }
 
 .footer__social-link:hover {
-    background: #eab308;
-    color: #000;
+    background: var(--gradient-primary);
+    /* Updated */
+    color: #fff;
     transform: translateY(-3px);
+    box-shadow: 0 4px 12px var(--color-shadow);
 }
 
 .footer__title {
@@ -3878,8 +3882,10 @@ textarea {
 }
 
 .footer__link:hover {
-    color: #eab308;
+    color: var(--color-secondary);
+    /* Updated */
     transform: translateX(5px);
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
 }
 
 .footer__status-card {
@@ -3892,8 +3898,10 @@ textarea {
 }
 
 .footer__status-card:hover {
-    border-color: #eab308;
+    border-color: var(--color-secondary);
+    /* Updated */
     background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
 }
 
 .status-header {
@@ -3911,23 +3919,24 @@ textarea {
 .status-dot {
     width: 8px;
     height: 8px;
-    background-color: #22c55e;
+    background-color: var(--color-secondary);
+    /* Updated */
     border-radius: 50%;
-    box-shadow: 0 0 10px #22c55e;
+    box-shadow: 0 0 10px var(--color-secondary);
     animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
     }
 
     70% {
-        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+        box-shadow: 0 0 0 6px rgba(6, 182, 212, 0);
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
     }
 }
 
@@ -3960,8 +3969,9 @@ textarea {
 }
 
 .footer__button {
-    background: #eab308;
-    color: #000;
+    background: var(--gradient-primary);
+    /* Updated */
+    color: #fff;
     border-radius: 6px;
     padding: 0 1rem;
     font-size: 1.2rem;
@@ -3969,11 +3979,13 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
 }
 
 .footer__button:hover {
-    background: #ca8a04;
+    filter: brightness(1.1);
     transform: translateX(3px);
+    box-shadow: 0 0 15px var(--color-shadow);
 }
 
 .footer__spam-text {
@@ -4001,7 +4013,8 @@ textarea {
 }
 
 .footer__legal-link:hover {
-    color: #eab308;
+    color: var(--color-secondary);
+    /* Updated */
     text-decoration: underline;
 }
 
