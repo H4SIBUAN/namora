@@ -858,17 +858,20 @@
             dx = 0; dy = 0;
             score = 0;
             speed = 100;
-            isPaused = false;
+            isPaused = true;
             document.getElementById('current-score').innerText = '0';
             gameOverScreen.style.display = 'none';
             placeFood();
-            update();
+            draw();
         };
 
         // INPUTS
         window.input = (dir) => {
-            if (isPaused && gameOverScreen.style.display === 'none') {
-                // Start game on first input if waiting
+            if (gameOverScreen.style.display === 'flex') return;
+
+            if (isPaused) {
+                isPaused = false;
+                update();
             }
 
             switch (dir) {
@@ -877,7 +880,6 @@
                 case 'left': if (dx !== 1) { dx = -1; dy = 0; } break;
                 case 'right': if (dx !== -1) { dx = 1; dy = 0; } break;
             }
-            if (isPaused && dx === 0 && dy === 0) { isPaused = false; update(); } // First move starts
         };
 
         document.addEventListener('keydown', (e) => {
@@ -917,9 +919,8 @@
 
         // Start
         resetGame();
-        // Pause by default until move
-        isPaused = true; dx = 0; dy = 0;
-        draw();
+        // Game starts paused, waiting for input
+
 
     </script>
 </body>
