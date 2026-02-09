@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Courier+New&display=swap"
         rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -806,30 +807,70 @@
     </main>
 
     <footer class="footer">
-        <div class="waves-container">
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                <defs>
-                    <path id="gentle-wave"
-                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                </defs>
-                <g class="parallax">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="var(--wave-color-1)" />
-                    <use xlink:href="#gentle-wave" x="48" y="3" fill="var(--wave-color-2)" />
-                    <use xlink:href="#gentle-wave" x="48" y="5" fill="var(--wave-color-3)" />
-                    <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--color-footer-bg)" />
-                </g>
-            </svg>
-        </div>
-        <div class="container">
+        <div class="footer__container container">
             <div class="footer__content">
-                <a href="#" class="footer__logo">ANH</a>
-                <div class="status-badge">
-                    <span class="status-dot"></span>
-                    System Operational
+                <a href="#" class="footer__brand">
+                    <i class="ri-robot-2-line"></i> syncode.site
+                </a>
+                <p class="footer__description">
+                    Engineering intelligence for the modern web. Exploring the frontiers of Machine Learning and
+                    aesthetic design.
+                </p>
+                <div class="footer__social">
+                    <a href="https://www.linkedin.com/in/ardiansyah-namora-hasibuan-b974a631b/" target="_blank"
+                        class="footer__social-link"><i class="ri-linkedin-fill"></i></a>
+                    <a href="https://github.com/H4SIBUAN" target="_blank" class="footer__social-link"><i
+                            class="ri-github-fill"></i></a>
+                    <a href="https://instagram.com/mrphx._" target="_blank" class="footer__social-link"><i
+                            class="ri-instagram-line"></i></a>
                 </div>
             </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Explore</h3>
+                <ul class="footer__links">
+                    <li><a href="#projects" class="footer__link">Latest Projects</a></li>
+                    <li><a href="#about" class="footer__link">About Me</a></li>
+                    <li><a href="#pendidikan" class="footer__link">Experience</a></li>
+                    <li><a href="#contact" class="footer__link">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Status</h3>
+                <div class="footer__status-card">
+                    <div class="status-header">
+                        <span>AVAILABILITY</span>
+                        <span class="status-dot"></span>
+                    </div>
+                    <p>Open for collaboration</p>
+                </div>
+                <div class="footer__status-card">
+                    <div class="status-header">
+                        <span>LOCATION</span>
+                        <span>public</span>
+                    </div>
+                    <p>Remote / Worldwide</p>
+                </div>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Stay Connected</h3>
+                <p class="footer__text">Get the latest ML insights and project updates.</p>
+                <form action="#" class="footer__form">
+                    <input type="email" placeholder="email@example.com" class="footer__input">
+                    <button type="button" class="footer__button"><i class="ri-arrow-right-line"></i></button>
+                </form>
+                <p class="footer__spam-text">No spam, just tech.</p>
+            </div>
         </div>
+
+        <div class="footer__bottom container">
+            <p class="footer__copyright">© 2026 Surya Yusuf Nugroho. Built with code & caffeine.</p>
+            <div class="footer__legal">
+                <a href="#" class="footer__legal-link">Privacy Policy</a>
+                <a href="#" class="footer__legal-link">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
