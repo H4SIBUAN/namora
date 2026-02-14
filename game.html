@@ -4,23 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NEON SERPENT | Cyberpunk Arcade</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>SKATEPUNK SERPENT | Arcade Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --neon-blue: #00f3ff;
-            --neon-pink: #ff00ff;
-            --neon-green: #0aff0a;
-            --bg-dark: #050505;
-            --surface: rgba(20, 20, 30, 0.8);
-            --grid-line: rgba(0, 243, 255, 0.1);
+            --neon-blue: #FFD700;
+            --neon-pink: #FFA500;
+            --neon-green: #FF6B00;
+            --bg-dark: #0A0A0A;
+            --surface: rgba(20, 20, 20, 0.8);
+            --grid-line: rgba(255, 215, 0, 0.08);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Bebas Neue', 'Impact', sans-serif;
             touch-action: none;
             user-select: none;
         }
@@ -329,7 +330,7 @@
             color: white;
             outline: none;
             transition: 0.3s;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         .form-input:focus {
@@ -516,7 +517,7 @@
 
 <body>
 
-    <h1 class="cyber-title">NEON <span>SERPENT</span></h1>
+    <h1 class="cyber-title">SKATE <span>SERPENT</span></h1>
 
     <div class="game-header">
         <button class="btn-cyber" onclick="window.close()">← EXIT SYSTEM</button>
@@ -574,17 +575,17 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeModals()">✕</span>
             <div class="modal-header">
-                <h2>NEURAL LINK SKINS</h2>
+                <h2>SNAKE SKINS</h2>
             </div>
             <div class="skin-grid">
                 <div class="skin-card active" id="skin-default" onclick="selectSkin('default')">
-                    <div class="skin-preview" style="background:#00f3ff; color:#00f3ff"></div>
-                    <div class="skin-name">CYBER BLUE</div>
+                    <div class="skin-preview" style="background:#FFD700; color:#FFD700"></div>
+                    <div class="skin-name">SKATE GOLD</div>
                 </div>
                 <div class="skin-card" id="skin-rgb" onclick="selectSkin('rgb')">
                     <div class="skin-preview"
                         style="background:linear-gradient(45deg, #ff0000, #00ff00, #0000ff); color:white"></div>
-                    <div class="skin-name">RGB OVERLOAD</div>
+                    <div class="skin-name">PUNK RAINBOW</div>
                     <div id="rgb-status" style="font-size:10px; color:#555; margin-top:5px;">LOCKED - FOLLOW TO UNLOCK
                     </div>
                 </div>
@@ -782,8 +783,8 @@
                     ctx.fillStyle = `hsl(${index * 10 + Date.now() / 10 % 360}, 100%, 50%)`;
                     ctx.shadowColor = `hsl(${index * 10 + Date.now() / 10 % 360}, 100%, 50%)`;
                 } else {
-                    ctx.fillStyle = index === 0 ? "#fff" : "#00f3ff";
-                    ctx.shadowColor = "#00f3ff";
+                    ctx.fillStyle = index === 0 ? "#fff" : "#FFD700";
+                    ctx.shadowColor = "#FFD700";
                 }
 
                 ctx.shadowBlur = 10;
@@ -792,8 +793,8 @@
             });
 
             // Draw Food
-            ctx.fillStyle = "#ff00ff";
-            ctx.shadowColor = "#ff00ff";
+            ctx.fillStyle = "#FFA500";
+            ctx.shadowColor = "#FFA500";
             ctx.shadowBlur = 15;
             ctx.beginPath();
             ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2 - 2, 0, Math.PI * 2);

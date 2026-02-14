@@ -99,19 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    /* ========================================
-       C. DIGITAL CLOCK (REAL-TIME)
-       ======================================== */
-    const updateClock = () => {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const timeDisplay = document.getElementById('time-display');
-        if (timeDisplay) timeDisplay.innerText = `${hours}:${minutes}:${seconds} WIB`;
-    };
-    setInterval(updateClock, 1000);
-    updateClock();
+
 
     /* ========================================
        D. CUSTOM CONTEXT MENU
@@ -255,21 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ========================================
        H. TYPING EFFECT & THEME
        ======================================== */
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle ? themeToggle.querySelector('span') : null;
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    if (themeIcon) themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-        });
-    }
+    /* Theme Toggle Removed - Dark Theme Enforced */
 
     const typedTextSpan = document.querySelector(".typed-text");
     const textArray = ["Siswa TKJ", "Web Developer", "Network Engineer", "Tech Enthusiast"];
@@ -590,9 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const target = item.getAttribute('data-target');
                     document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
                     break;
-                case 'theme':
-                    themeToggle?.click();
-                    break;
+
                 case 'print':
                     window.print();
                     break;
